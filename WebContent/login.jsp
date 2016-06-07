@@ -13,7 +13,7 @@
 <div class="wrapper row1">
   <header id="header" class="clear">
     <div id="hgroup">
-      <h1><a href="#">KidCode</a></h1>
+      <h1><a href="/KidCode/Controller?action=index">KidCode</a></h1>
       <h2>Вчитись програмувати ніколи не рано!</h2>
     </div>
     <%@ include file="navigation.jsp" %>
@@ -28,24 +28,38 @@
     <!-- main content -->
     <div id="homepage">
       <!-- services area -->
+      <jsp:useBean id="user" class="beans.User" scope="session"></jsp:useBean>
+      <jsp:setProperty name="user" property="username" value="test1"></jsp:setProperty>
+      
       <div>
-		<form style="margin-left: 200px">
+      <% String message = (String) request.getAttribute("message");
+      if (message == null) message = "";%>
+      <h3><%=message%></h3>
+      </div>
+      
+      <div>
+      
+		<form style="margin-left: 200px" method="post" action="/KidCode/LoginController">
+		
+		<input type="hidden" name="action" value="dologin" />
 				<ul class="left-form">
 					<li>
-						<input type="text"   placeholder="Email" required/>
+						<input type="text"   placeholder="Email" required name="email"/>
 						<a href="#" class="icon ticker"> </a>
 						<div class="clear"> </div>
 					</li> 
 					<li>
-						<input type="password"   placeholder="Пароль" required/>
+						<input type="password"   placeholder="Пароль" required name="password"/>
 						<a href="#" class="icon into"> </a>
 						<div class="clear"> </div>
 					</li>
-					<input type="submit" onclick="myFunction()" value="Увійти">
+					<input type="submit" value="Увійти">
 						<div class="clear"> </div>
 				</ul>
 				<div class="clear"> </div>					
 			</form>
+			
+			
 			</div>
       <!-- / services area -->
       <!-- / One Quarter -->
